@@ -5,7 +5,8 @@
 #include <Arduino.h>
 #include "gametable.h"
 
-void celebration(uint8_t led);
+void intro();
 void roulette();
+void roulette2();
 
 #endif

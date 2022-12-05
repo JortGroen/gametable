@@ -1,39 +1,94 @@
 #include "roulette.h"
 
-void celebration(uint8_t led){
-  for (uint8_t k=0; k<10; k++){
-    digitalWrite(led, LOW);
+void intro(){
+  setAll(LOW);
+  for (uint8_t i=0; i<NOleds; i++){
+    digitalWrite(LEDS[i], HIGH);
     delay(500);
-    digitalWrite(led, HIGH);
+    digitalWrite(LEDS[i], LOW);
+  }
+  for (uint8_t i=NOleds; i>0; i--){
+    digitalWrite(LEDS[i], HIGH);
     delay(500);
+    digitalWrite(LEDS[i], LOW);
   }
 }
 
 void roulette(){
+  //intro();
+  //delay(1000);
+  setAll(LOW);
   uint32_t seed = millis();
   randomSeed(seed);
-  //Serial.begin(115200);
-  //Serial.println(seed);
-
   uint8_t winner = random(0, NOleds);  
   uint16_t maxdelay = 1000;
 
-  uint8_t leds[5] = {LED_GREEN, LED_YELLOW, LED_RED, LED_BLUE, LED_WHITE};
   float i=50;
   uint8_t j=0;
   while(true){
-    digitalWrite(leds[j], HIGH);
+    digitalWrite(LEDS[j], HIGH);
     delay(round(i));
     if (i>= maxdelay and j==winner){
       delay(1000);
       return;
     }
-    digitalWrite(leds[j], LOW);
+    digitalWrite(LEDS[j], LOW);
     i = i*1.1;
     j = j+1;
     if (j == NOleds){
       j = 0;
     }
+  }
+}
+
+void roulette2(){
+  //intro();
+  //delay(1000);
+  uint32_t seed = millis();
+  randomSeed(seed);
+  setAll(HIGH);
+
+  uint8_t winner;
+  bool participants[5] = {true, true, true, true, true};
+  for (uint8_t i=NOleds; i>1; i--){
+    
+    delay(random(2000, 10000)); // do random delay between 2 and 10 sec
+    
+    winner = random(0, i); // decide on next winner
+
+    // check for all participants
+    for (uint8_t participant=0; participant<=NOleds; participant++){
+
+      // check if participant is still in the game
+      if (!participants[participant]){
+        continue;
+      }
+
+      // check if participant is the winner
+      if (participant == winner){
+        digitalWrite(LEDS[participant], LOW); // congrats you're out
+        participants[participant] = false; // not joining next round
+      }
+    }
+  }
+
+  setAll(LOW);
+
+  // find loser
+  uint8_t loser = 0;
+  for (uint8_t participant=0; participant<NOleds; participant++){
+    if (participants[participant]){
+      loser = participant;
+      break;
+    }
+  }
+
+  // blink loser
+  for (uint8_t i; i<10; i++){
+    digitalWrite(LEDS[loser], HIGH);
+    delay(500);
+    digitalWrite(LEDS[loser], LOW);
+    delay(500);
   }
   
 }
