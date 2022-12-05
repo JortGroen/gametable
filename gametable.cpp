@@ -41,12 +41,34 @@ void setAll(bool state){
   setLeds(states);
 }
 
+void blinkLed(uint8_t led, uint8_t quantity, uint16_t delaytime){
+  for (uint8_t i=0; i<quantity; i++){
+    digitalWrite(led, HIGH);
+    delay(delaytime);
+    digitalWrite(led, LOW);
+    delay(delaytime);
+  }
+}
+
 void updateButtons(){
   buttonG = digitalRead(BUTTON_GREEN);
   buttonY = digitalRead(BUTTON_YELLOW);
   buttonR = digitalRead(BUTTON_RED);
   buttonB = digitalRead(BUTTON_BLUE);
   buttonW = digitalRead(BUTTON_WHITE);
+}
+
+uint8_t waitforpress(){
+  while(true){
+    for (uint8_t i=0; i<NObuttons; i++){
+      if (digitalRead(BUTTONS[i]) == HIGH){
+        updateButtons();
+        return i;
+      }
+    }
+    delay(10); // I have encountered before that this is needed sometimes
+  }
+  return -1;
 }
 
 uint16_t updatingDelay(uint16_t t, uint8_t buttons[], uint8_t buttons_length){
@@ -72,6 +94,86 @@ uint16_t updatingDelay(uint16_t t, uint8_t buttons[], uint8_t buttons_length){
   return 0;
 }
 // HELPER FUNCS STOP
+
+uint8_t menu(){
+  uint8_t buttons[5] = {BUTTON_GREEN, BUTTON_YELLOW, BUTTON_RED, BUTTON_BLUE, BUTTON_WHITE};
+  while(true){
+    setAll(HIGH);
+    delay(1000);
+    setAll(LOW);
+    uint16_t restdelay = 1000;
+    while(restdelay > 0){
+      restdelay = updatingDelay(restdelay, buttons, 5);
+      updateButtons();
+      if(buttonG){
+        digitalWrite(LED_GREEN, HIGH);
+        return 0;
+      }
+      if(buttonW){
+        digitalWrite(LED_WHITE, HIGH);
+        return 1;
+      }
+      if(buttonB){
+        digitalWrite(LED_BLUE, HIGH);
+        return 2;
+      }
+      if(buttonR){
+        digitalWrite(LED_RED, HIGH);
+        return 3;
+      }
+      if(buttonY){
+        digitalWrite(LED_YELLOW, HIGH);
+        return 4;
+      }
+    }
+  }  
+  return -1;
+}
+
+// CELLEBRATIONS
+void celebrate(){
+  celebrate1();
+}
+void celebrate1(){
+  uint16_t delaytime = 500;
+  setAll(LOW);
+  delay(delaytime);
+  digitalWrite(LED_GREEN, HIGH);
+  delay(delaytime);
+  digitalWrite(LED_GREEN, LOW);
+  
+  digitalWrite(LED_YELLOW, HIGH);
+  digitalWrite(LED_WHITE, HIGH);
+  delay(delaytime);
+  digitalWrite(LED_YELLOW, LOW);
+  digitalWrite(LED_WHITE, LOW);
+  
+  digitalWrite(LED_BLUE, HIGH);
+  digitalWrite(LED_RED, HIGH);  
+  delay(delaytime);
+  digitalWrite(LED_BLUE, LOW);
+  digitalWrite(LED_RED, LOW);  
+ 
+  delay(delaytime);
+
+  digitalWrite(LED_BLUE, HIGH);
+  digitalWrite(LED_RED, HIGH);
+  delay(delaytime);
+  digitalWrite(LED_BLUE, LOW);
+  digitalWrite(LED_RED, LOW);
+
+  digitalWrite(LED_YELLOW, HIGH);
+  digitalWrite(LED_WHITE, HIGH);
+  delay(delaytime);
+  digitalWrite(LED_YELLOW, LOW);
+  digitalWrite(LED_WHITE, LOW);
+
+  digitalWrite(LED_GREEN, HIGH);
+  delay(delaytime);
+  digitalWrite(LED_GREEN, LOW);
+
+  return;
+}
 
 // TEST FUNCS
 

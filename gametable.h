@@ -21,6 +21,8 @@
 // CONSTANTS
 #define NOleds 5
 #define NObuttons 5
+const uint8_t LEDS[5] = {LED_GREEN, LED_YELLOW, LED_RED, LED_BLUE, LED_WHITE};
+const uint8_t BUTTONS[5] = {BUTTON_GREEN, BUTTON_YELLOW, BUTTON_RED, BUTTON_BLUE, BUTTON_WHITE};
 
 // GLOBALS
 extern bool buttonG;
@@ -35,8 +37,17 @@ void tableinit();
 // HELPER FUNCTIONS
 void setLeds(bool states[5]);
 void setAll(bool state);
+void blinkLed(uint8_t led, uint8_t quantity, uint16_t delaytime);
 void updateButtons();
+uint8_t waitforpress();
 uint16_t updatingDelay(uint16_t t, uint8_t buttons[], uint8_t buttons_length);
+
+// MENUS
+uint8_t menu();
+
+// CELEBRATIONS
+void celebrate();
+void celebrate1();
 
 // TEST FUNCTIONS
 void test();
