@@ -5,6 +5,7 @@
 #include "roulette.h"
 #include "pickatooth.h"
 #include "crashpilot.h"
+#include "party.h"
 
 uint8_t game;
 
@@ -35,12 +36,7 @@ void loop() {
       break;
 
     // yellow button
-    case 4: 
-      uint8_t button = waitforpress();
-      if(button == BUTTON_RED){
-        digitalWrite(LED_RED, HIGH);
-        delay(1000);
-      }
+    case 4: party();
       break;
   }
 }
