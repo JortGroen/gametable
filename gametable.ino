@@ -1,8 +1,10 @@
 // WARNING: when initializing serial connection, leds white and red are frozen on!
+// WARNING: when doing fast loops, small delays have to be added! otherwise the chip will crash.
 
 #include "gametable.h"
 #include "roulette.h"
 #include "pickatooth.h"
+#include "crashpilot.h"
 
 uint8_t game;
 
@@ -10,8 +12,7 @@ void setup() {
   tableinit();
 }
 
-void loop() {
-  
+void loop() {  
   game = menu();
   delay(2000);
   setAll(LOW);
@@ -30,7 +31,7 @@ void loop() {
       break;
 
     // red button
-    case 3: celebrate();
+    case 3: crashpilot();
       break;
 
     // yellow button
