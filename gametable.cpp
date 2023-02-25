@@ -15,6 +15,7 @@ void tableinit(){
   pinMode(LED_BLUE, OUTPUT);
   pinMode(LED_RED, OUTPUT);
   pinMode(LED_YELLOW, OUTPUT);
+  pinMode(BUZZER, OUTPUT);
   
   pinMode(BUTTON_GREEN, INPUT);
   pinMode(BUTTON_WHITE, INPUT);
@@ -39,6 +40,7 @@ void setLeds(bool states[5]){
 void setAll(bool state){
   bool states[5] = {state, state, state, state, state}; 
   setLeds(states);
+  //digitalWrite(BUZZER, state);
 }
 
 void blinkLed(uint8_t led, uint8_t quantity, uint16_t delaytime){
@@ -48,6 +50,12 @@ void blinkLed(uint8_t led, uint8_t quantity, uint16_t delaytime){
     digitalWrite(led, LOW);
     delay(delaytime);
   }
+}
+
+void beebShort(){
+  digitalWrite(BUZZER, HIGH);
+  delay(BEEBSHORTD);
+  digitalWrite(BUZZER, LOW);
 }
 
 void updateButtons(){

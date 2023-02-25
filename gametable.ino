@@ -11,6 +11,14 @@ uint8_t game;
 
 void setup() {
   tableinit();
+  delay(500);
+  digitalWrite(BUZZER, HIGH);
+  delay(100);
+  digitalWrite(BUZZER, LOW);
+  delay(100);
+  digitalWrite(BUZZER, HIGH);
+  delay(100);
+  digitalWrite(BUZZER, LOW);
 }
 
 void loop() {  

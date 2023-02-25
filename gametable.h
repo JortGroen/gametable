@@ -17,12 +17,15 @@
 #define BUTTON_RED 12 //D6
 #define LED_YELLOW 0 //D3
 #define BUTTON_YELLOW 16 //D0
+#define BUZZER 2 //D4 
 
 // CONSTANTS
 #define NOleds 5
 #define NObuttons 5
 const uint8_t LEDS[5] = {LED_GREEN, LED_YELLOW, LED_RED, LED_BLUE, LED_WHITE};
 const uint8_t BUTTONS[5] = {BUTTON_GREEN, BUTTON_YELLOW, BUTTON_RED, BUTTON_BLUE, BUTTON_WHITE};
+#define BEEBSHORTD 100
+#define BEEBLONGD 500
 
 // GLOBALS
 extern bool buttonG;
@@ -38,6 +41,7 @@ void tableinit();
 void setLeds(bool states[5]);
 void setAll(bool state);
 void blinkLed(uint8_t led, uint8_t quantity, uint16_t delaytime);
+void beebShort();
 void updateButtons();
 uint8_t waitforpress();
 uint16_t updatingDelay(uint16_t t, uint8_t buttons[], uint8_t buttons_length);
