@@ -6,7 +6,7 @@ uint32_t t2 = 0;
 uint32_t timeout = 0;
 
 void setup() {
-  Serial.begin(19200);
+  Serial.begin(9600);
   pinMode(BUTTON, INPUT);
 }
 
@@ -23,10 +23,14 @@ void loop() {
     delay(5);
   } 
   t2 = millis();
-  Serial.print("wait: ");
+  Serial.print("delay(");
   Serial.print(t1-t0);
-  Serial.print(", hold: ");
-  Serial.println(t2-t1);
+  Serial.println(");");
+  Serial.println("digitalWrite(BUZZER, HIGH);");
+  Serial.print("delay(");
+  Serial.print(t2-t1);
+  Serial.println(");");
+  Serial.println("digitalWrite(BUZZER, LOW);");
   t0 = t2;
   //timeout = 0;
 }
