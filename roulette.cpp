@@ -21,18 +21,21 @@ void roulette(){
   uint32_t seed = millis();
   randomSeed(seed);
   uint8_t winner = random(0, NOleds);  
-  uint16_t maxdelay = 1000;
+  uint16_t maxdelay = 500;
 
   float i=50;
   uint8_t j=0;
   while(true){
     digitalWrite(LEDS[j], HIGH);
+    digitalWrite(BUZZER, HIGH);
     delay(round(i));
     if (i>= maxdelay and j==winner){
       delay(1000);
+      digitalWrite(BUZZER, LOW);
       return;
     }
     digitalWrite(LEDS[j], LOW);
+    digitalWrite(BUZZER, LOW);
     i = i*1.1;
     j = j+1;
     if (j == NOleds){
