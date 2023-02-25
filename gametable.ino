@@ -6,6 +6,7 @@
 #include "pickatooth.h"
 #include "crashpilot.h"
 #include "party.h"
+#include "buzzerMusic.h"
 
 uint8_t game;
 

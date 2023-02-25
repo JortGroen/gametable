@@ -1,4 +1,5 @@
 #include "roulette.h"
+#include "buzzerMusic.h"
 
 void intro(){
   setAll(LOW);
@@ -30,8 +31,9 @@ void roulette(){
     digitalWrite(BUZZER, HIGH);
     delay(round(i));
     if (i>= maxdelay and j==winner){
-      delay(1000);
       digitalWrite(BUZZER, LOW);
+      delay(500);
+      buzzer_celebration();
       return;
     }
     digitalWrite(LEDS[j], LOW);
