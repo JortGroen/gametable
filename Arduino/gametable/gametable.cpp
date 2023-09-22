@@ -88,12 +88,11 @@ uint16_t updatingDelay(uint16_t t, uint8_t buttons[], uint8_t buttons_length){
   }
   
   bool change = false;
+  bool value = false;
   for (int i=0; i<t; i+=delaytime){
     for (uint8_t button=0; button<buttons_length; button++){
-      if (digitalRead(buttons[button]) != statuses[button]){
-        //if (i>t){
-          //Serial.println("problem 2");
-        //}
+      value = digitalRead(buttons[button]);
+      if (value != statuses[button] && value == true){
         return t-i;
       }
     }
@@ -114,23 +113,38 @@ uint8_t menu(){
       restdelay = updatingDelay(restdelay, buttons, 5);
       updateButtons();
       if(buttonG){
+        digitalWrite(BUZZER, HIGH);
         digitalWrite(LED_GREEN, HIGH);
+        delay(50);
+        digitalWrite(BUZZER, LOW);
         return 0;
       }
       if(buttonW){
+        digitalWrite(BUZZER, HIGH);
         digitalWrite(LED_WHITE, HIGH);
+        delay(50);
+        digitalWrite(BUZZER, LOW);
         return 1;
       }
       if(buttonB){
+        digitalWrite(BUZZER, HIGH);
         digitalWrite(LED_BLUE, HIGH);
+        delay(50);
+        digitalWrite(BUZZER, LOW);
         return 2;
       }
       if(buttonR){
+        digitalWrite(BUZZER, HIGH);
         digitalWrite(LED_RED, HIGH);
+        delay(50);
+        digitalWrite(BUZZER, LOW);
         return 3;
       }
       if(buttonY){
+        digitalWrite(BUZZER, HIGH);
         digitalWrite(LED_YELLOW, HIGH);
+        delay(50);
+        digitalWrite(BUZZER, LOW);
         return 4;
       }
     }

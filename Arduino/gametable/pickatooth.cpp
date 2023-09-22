@@ -12,10 +12,30 @@ void pickatooth(){
   for (uint8_t turn=0; turn<NOleds-1; turn++){
     button = waitforpress();
     if (button == loser){ // ah oh, you lost
-      blinkLed(LEDS[loser], 10, 500);
+      digitalWrite(BUZZER, HIGH);
+      digitalWrite(LEDS[loser], HIGH);
+      delay(500);
+      digitalWrite(BUZZER, LOW);
+      digitalWrite(LEDS[loser], LOW);
+      delay(500);
+      digitalWrite(BUZZER, HIGH);
+      digitalWrite(LEDS[loser], HIGH);
+      delay(500);
+      digitalWrite(BUZZER, LOW);
+      digitalWrite(LEDS[loser], LOW);
+      delay(500);
+      digitalWrite(BUZZER, HIGH);
+      digitalWrite(LEDS[loser], HIGH);
+      delay(500);
+      digitalWrite(BUZZER, LOW);
+      digitalWrite(LEDS[loser], LOW);
+      //blinkLed(LEDS[loser], 5, 500);
       return;
     }
     digitalWrite(LEDS[button], HIGH);
+    digitalWrite(BUZZER, HIGH);
+    delay(50);
+    digitalWrite(BUZZER, LOW);
     
     while(digitalRead(BUTTONS[button]) == HIGH){
       delay(10);

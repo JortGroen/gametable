@@ -6,6 +6,7 @@
 #include "pickatooth.h"
 #include "crashpilot.h"
 #include "party.h"
+#include "wackamole.h"
 #include "buzzerMusic.h"
 
 uint8_t game;
@@ -33,7 +34,7 @@ void loop() {
       break;
       
     // white button
-    case 1: roulette2();
+    case 1: wackamole(); //roulette2();
       break;
       
     // blue button

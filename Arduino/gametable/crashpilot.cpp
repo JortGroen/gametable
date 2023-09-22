@@ -43,7 +43,9 @@ void crashpilot_game(uint8_t players[], uint8_t NOplayers){
           break;
         }
         else{ // it was pressed in time, continue the delay
+          digitalWrite(BUZZER, HIGH);
           delay(restdelay);
+          digitalWrite(BUZZER, LOW);
         }
       }
       // else the button was not pressed in time
@@ -63,7 +65,24 @@ void crashpilot_game(uint8_t players[], uint8_t NOplayers){
 
   // we have a loser
   setAll(LOW);
-  blinkLed(LEDS[loser], 5, 500); // blink loser
+  digitalWrite(BUZZER, HIGH);
+  digitalWrite(LEDS[loser], HIGH);
+  delay(500);
+  digitalWrite(BUZZER, LOW);
+  digitalWrite(LEDS[loser], LOW);
+  delay(500);
+  digitalWrite(BUZZER, HIGH);
+  digitalWrite(LEDS[loser], HIGH);
+  delay(500);
+  digitalWrite(BUZZER, LOW);
+  digitalWrite(LEDS[loser], LOW);
+  delay(500);
+  digitalWrite(BUZZER, HIGH);
+  digitalWrite(LEDS[loser], HIGH);
+  delay(500);
+  digitalWrite(BUZZER, LOW);
+  digitalWrite(LEDS[loser], LOW);
+  //blinkLed(LEDS[loser], 5, 500); // blink loser
 }
 
 void crashpilot(){
