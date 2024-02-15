@@ -24,11 +24,16 @@ void roulette(){
   uint8_t winner = random(0, NOleds);  
   uint16_t maxdelay = 500;
 
+  uint8_t counter = 0;
   float i=50;
   uint8_t j=0;
   while(true){
     digitalWrite(LEDS[j], HIGH);
-    digitalWrite(BUZZER, HIGH);
+    counter += 1;
+    if (counter >= 2){
+      digitalWrite(BUZZER, HIGH);
+      counter = 0;
+    }
     delay(round(i));
     if (i>= maxdelay and j==winner){
       digitalWrite(BUZZER, LOW);
